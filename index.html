@@ -365,6 +365,33 @@
     .tip-card ul { padding-left: 16px; }
     .tip-card li { font-size: 0.84em; color: var(--gray); line-height: 1.7; }
 
+    /* ─── GALERÍA ─── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .gallery-item {
+      position: relative; border-radius: 12px; overflow: hidden;
+      aspect-ratio: 4/3; cursor: zoom-in;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .gallery-item:hover { transform: scale(1.03); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform 0.4s;
+    }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      color: white; padding: 20px 12px 10px;
+      font-size: 0.85em; font-weight: 600;
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .gallery-item:hover .gallery-caption { opacity: 1; }
+
     /* ─── DIVIDER ─── */
     .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
@@ -438,6 +465,7 @@
     <li><a href="#itinerario">Itinerario</a></li>
     <li><a href="#reservas">Reservas</a></li>
     <li><a href="#restaurantes">Restaurantes</a></li>
+    <li><a href="#galeria">Galería</a></li>
     <li><a href="#visitar">Visitar</a></li>
     <li><a href="#practico">Info práctica</a></li>
   </ul>
@@ -1106,6 +1134,60 @@
   </div>
 </section>
 
+<!-- ═══ GALERÍA ═══ -->
+<section class="section" id="galeria">
+  <div class="section-header">
+    <h2>📸 Galería</h2>
+    <div class="section-line"></div>
+    <p>Los imprescindibles de Washington DC</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Lincoln_Memorial_Washington_D.C._Aerial_view.jpg/1200px-Lincoln_Memorial_Washington_D.C._Aerial_view.jpg" alt="Lincoln Memorial" loading="lazy" />
+      <div class="gallery-caption">Lincoln Memorial</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/US_Capitol_Building_at_night_Jan_2006.jpg/1200px-US_Capitol_Building_at_night_Jan_2006.jpg" alt="Capitolio" loading="lazy" />
+      <div class="gallery-caption">Capitolio</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Washington_Monument_from_the_Lincoln_Memorial.jpg/1200px-Washington_Monument_from_the_Lincoln_Memorial.jpg" alt="Washington Monument" loading="lazy" />
+      <div class="gallery-caption">Washington Monument</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/WhiteHouseSouthFacade.JPG/1200px-WhiteHouseSouthFacade.JPG" alt="Casa Blanca" loading="lazy" />
+      <div class="gallery-caption">Casa Blanca</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/National_Mall_Aerial_looking_East.jpg/1200px-National_Mall_Aerial_looking_East.jpg" alt="National Mall" loading="lazy" />
+      <div class="gallery-caption">National Mall</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Jefferson_Memorial_at_dusk_2007.jpg/1200px-Jefferson_Memorial_at_dusk_2007.jpg" alt="Jefferson Memorial" loading="lazy" />
+      <div class="gallery-caption">Jefferson Memorial</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Aerial_view_of_Arlington_National_Cemetery.jpg/1200px-Aerial_view_of_Arlington_National_Cemetery.jpg" alt="Arlington Cemetery" loading="lazy" />
+      <div class="gallery-caption">Arlington Cemetery</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/John_F._Kennedy_Center_for_the_Performing_Arts.jpg/1200px-John_F._Kennedy_Center_for_the_Performing_Arts.jpg" alt="Kennedy Center" loading="lazy" />
+      <div class="gallery-caption">Kennedy Center</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:9999; display:none; align-items:center; justify-content:center; cursor:zoom-out;">
+  <button onclick="closeLightbox()" style="position:absolute; top:20px; right:28px; background:none; border:none; color:white; font-size:2.5em; cursor:pointer; line-height:1;">✕</button>
+  <button id="lb-prev" onclick="event.stopPropagation(); lbNav(-1)" style="position:absolute; left:20px; background:rgba(255,255,255,0.15); border:none; color:white; font-size:2em; cursor:pointer; padding:10px 16px; border-radius:50%;">‹</button>
+  <img id="lightbox-img" src="" alt="" style="max-width:90vw; max-height:88vh; border-radius:10px; box-shadow:0 8px 40px rgba(0,0,0,0.8);" onclick="event.stopPropagation()" />
+  <div id="lightbox-cap" style="position:absolute; bottom:24px; left:50%; transform:translateX(-50%); color:white; font-size:1em; background:rgba(0,0,0,0.5); padding:6px 20px; border-radius:20px;"></div>
+  <button id="lb-next" onclick="event.stopPropagation(); lbNav(1)" style="position:absolute; right:20px; background:rgba(255,255,255,0.15); border:none; color:white; font-size:2em; cursor:pointer; padding:10px 16px; border-radius:50%;">›</button>
+</div>
+
+<hr class="divider" />
+
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <p>🇺🇸 <span>Washington DC · Junio 2026</span></p>
@@ -1116,36 +1198,54 @@
   </p>
 </footer>
 
-<!-- ═══ COUNTDOWN SCRIPT ═══ -->
+<!-- ═══ LIGHTBOX + COUNTDOWN SCRIPT ═══ -->
 <script>
-  // Salida: 17 junio 2026, 10:00 hora local de Palma (Europe/Madrid, CEST = UTC+2)
-  // = 2026-06-17T08:00:00Z
+  // ── Countdown ──
   const target = new Date('2026-06-17T08:00:00Z');
-
   function pad(n) { return String(n).padStart(2, '0'); }
-
   function tick() {
-    const now = new Date();
-    const diff = target - now;
-    if (diff <= 0) {
-      document.getElementById('cd-days').textContent = '00';
-      document.getElementById('cd-hours').textContent = '00';
-      document.getElementById('cd-mins').textContent = '00';
-      document.getElementById('cd-secs').textContent = '00';
-      return;
-    }
-    const days  = Math.floor(diff / 86400000);
-    const hours = Math.floor((diff % 86400000) / 3600000);
-    const mins  = Math.floor((diff % 3600000)  / 60000);
-    const secs  = Math.floor((diff % 60000)    / 1000);
-    document.getElementById('cd-days').textContent  = pad(days);
-    document.getElementById('cd-hours').textContent = pad(hours);
-    document.getElementById('cd-mins').textContent  = pad(mins);
-    document.getElementById('cd-secs').textContent  = pad(secs);
+    const diff = target - new Date();
+    if (diff <= 0) { ['days','hours','mins','secs'].forEach(id => document.getElementById('cd-'+id).textContent='00'); return; }
+    document.getElementById('cd-days').textContent  = pad(Math.floor(diff / 86400000));
+    document.getElementById('cd-hours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
+    document.getElementById('cd-mins').textContent  = pad(Math.floor((diff % 3600000) / 60000));
+    document.getElementById('cd-secs').textContent  = pad(Math.floor((diff % 60000) / 1000));
   }
+  tick(); setInterval(tick, 1000);
 
-  tick();
-  setInterval(tick, 1000);
+  // ── Lightbox ──
+  let lbItems = [];
+  let lbIndex = 0;
+
+  function openLightbox(el) {
+    lbItems = Array.from(document.querySelectorAll('.gallery-item'));
+    lbIndex = lbItems.indexOf(el);
+    showLb();
+    document.getElementById('lightbox').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function showLb() {
+    const img = lbItems[lbIndex].querySelector('img');
+    const cap = lbItems[lbIndex].querySelector('.gallery-caption');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox-cap').textContent = cap ? cap.textContent : '';
+  }
+  function lbNav(dir) {
+    lbIndex = (lbIndex + dir + lbItems.length) % lbItems.length;
+    showLb();
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (lb.style.display === 'none') return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lbNav(-1);
+    if (e.key === 'ArrowRight') lbNav(1);
+  });
 </script>
 
 </body>
