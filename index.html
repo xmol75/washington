@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Washington DC · Junio 2026</title>
+  <style>
+    :root {
+      --navy: #0d1b2a;
+      --navy2: #1b2d45;
+      --red: #c0392b;
+      --gold: #f0c040;
+      --blue: #1a73e8;
+      --teal: #00b4d8;
+      --green: #27ae60;
+      --light: #f0f4f8;
+      --white: #ffffff;
+      --gray: #64748b;
+      --border: #e2e8f0;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--light); color: #1e293b; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b3a5c 60%, #0d2d4a 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 20px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-flag { font-size: 64px; margin-bottom: 16px; display: block; }
+    .hero h1 {
+      font-size: clamp(2.2em, 6vw, 4em);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub {
+      font-size: 1em;
+      color: #90a8c5;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    /* ─── COUNTDOWN ─── */
+    .countdown-wrap {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      display: inline-flex;
+      gap: 6px;
+      padding: 20px 30px;
+      margin-bottom: 30px;
+    }
+    .cd-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 70px;
+    }
+    .cd-num {
+      font-size: 2.6em;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .cd-label {
+      font-size: 0.65em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #90a8c5;
+      margin-top: 4px;
+    }
+    .cd-sep {
+      font-size: 2em;
+      color: rgba(255,255,255,0.3);
+      align-self: flex-start;
+      padding-top: 8px;
+    }
+    .countdown-title {
+      font-size: 0.8em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #90a8c5;
+      margin-bottom: 10px;
+    }
+
+    /* Badges */
+    .hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .hero-badge {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 0.82em;
+      color: white;
+    }
+    .hero-badge strong { color: var(--gold); }
+
+    /* ─── NAV ─── */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    nav ul { display: flex; justify-content: center; flex-wrap: wrap; list-style: none; }
+    nav ul li a {
+      display: block; padding: 15px 16px;
+      text-decoration: none; color: var(--gray);
+      font-size: 0.8em; font-weight: 600;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      transition: color 0.2s;
+      border-bottom: 3px solid transparent;
+    }
+    nav ul li a:hover { color: var(--blue); border-bottom-color: var(--blue); }
+
+    /* ─── SECTIONS ─── */
+    .section { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+    .section-header { margin-bottom: 32px; }
+    .section-header h2 {
+      font-size: 1.7em; font-weight: 800; color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .section-header p { color: var(--gray); font-size: 0.95em; }
+    .section-line {
+      width: 40px; height: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      border-radius: 2px; margin: 8px 0 0;
+    }
+
+    /* ─── VUELOS ─── */
+    .flights-grid { display: grid; gap: 14px; }
+    .flight-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: flex; align-items: center; gap: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .flight-num {
+      background: var(--navy);
+      color: white; border-radius: 8px;
+      padding: 6px 14px; font-size: 0.8em;
+      font-weight: 700; letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    .flight-route { flex: 1; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .flight-city { text-align: center; }
+    .flight-city .time { font-size: 1.6em; font-weight: 800; color: var(--navy); line-height: 1; }
+    .flight-city .city { font-size: 0.8em; color: var(--gray); margin-top: 3px; }
+    .flight-city .code { font-size: 0.75em; font-weight: 700; color: var(--blue); }
+    .flight-arrow {
+      flex: 1; text-align: center; position: relative;
+      min-width: 80px;
+    }
+    .flight-arrow::before {
+      content: '';
+      display: block; height: 1px;
+      background: linear-gradient(90deg, var(--border), var(--blue), var(--border));
+      margin-bottom: 4px;
+    }
+    .flight-arrow .plane { font-size: 1.2em; }
+    .flight-arrow .date { font-size: 0.72em; color: var(--gray); }
+    .flight-meta { font-size: 0.8em; color: var(--gray); text-align: right; }
+    .flight-meta strong { color: var(--navy); display: block; }
+
+    /* ─── HOTEL ─── */
+    .hotel-card {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      color: white; border-radius: 20px;
+      padding: 32px; position: relative; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(13,27,42,0.25);
+    }
+    .hotel-card::after {
+      content: '🏨';
+      position: absolute; right: 24px; top: 24px;
+      font-size: 5em; opacity: 0.08;
+    }
+    .hotel-card h3 { font-size: 1.5em; font-weight: 800; margin-bottom: 6px; }
+    .hotel-card .addr { color: #90a8c5; margin-bottom: 14px; font-size: 0.9em; }
+    .hotel-card p { color: #c8d8e8; line-height: 1.6; margin-bottom: 16px; }
+    .hotel-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hotel-tag {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 0.8em; color: white;
+    }
+
+    /* ─── ITINERARIO ─── */
+    .day-card {
+      background: var(--white);
+      border-radius: 16px; margin-bottom: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .day-header {
+      padding: 16px 22px; display: flex; align-items: center; gap: 14px;
+    }
+    .day-header.color-1 { background: linear-gradient(90deg, #0d1b2a, #1b3a5c); }
+    .day-header.color-2 { background: linear-gradient(90deg, #1a237e, #283593); }
+    .day-header.color-3 { background: linear-gradient(90deg, #1b5e20, #2e7d32); }
+    .day-header.color-4 { background: linear-gradient(90deg, #7b1fa2, #8e24aa); }
+    .day-header.color-congress { background: linear-gradient(90deg, #b71c1c, #c62828); }
+    .day-header.color-5 { background: linear-gradient(90deg, #e65100, #f57c00); }
+    .day-header.color-6 { background: linear-gradient(90deg, #37474f, #546e7a); }
+    .day-num-badge {
+      background: rgba(255,255,255,0.2);
+      color: white; border-radius: 50%;
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.9em; flex-shrink: 0;
+    }
+    .day-header h3 { color: white; font-size: 1.05em; font-weight: 700; }
+    .day-header .day-date { color: rgba(255,255,255,0.7); font-size: 0.8em; margin-top: 2px; }
+    .day-body { padding: 22px; }
+    .day-body.congress-body {
+      background: #fff8f8;
+      border-top: 3px solid var(--red);
+    }
+    .congress-info {
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .congress-icon { font-size: 2.5em; flex-shrink: 0; }
+    .congress-info h4 { color: var(--red); font-size: 0.95em; margin-bottom: 6px; }
+    .congress-info p { color: var(--gray); font-size: 0.88em; line-height: 1.6; }
+    .congress-info .venue {
+      background: #fff0f0; border-radius: 8px;
+      padding: 8px 12px; margin-top: 10px;
+      font-size: 0.82em; color: #7f0000;
+    }
+    .schedule-item {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 12px; margin-bottom: 14px; align-items: start;
+    }
+    .schedule-item:last-child { margin-bottom: 0; }
+    .time-pill {
+      background: var(--navy); color: white;
+      border-radius: 8px; padding: 4px 10px;
+      font-size: 0.75em; font-weight: 600;
+      text-align: center; white-space: nowrap;
+    }
+    .time-pill.morning { background: #1b5e20; }
+    .time-pill.afternoon { background: #0d47a1; }
+    .time-pill.evening { background: #4a148c; }
+    .time-pill.night { background: #212121; }
+    .time-pill.exact { background: var(--red); }
+    .sched-info h4 { color: var(--navy); font-size: 0.95em; font-weight: 600; margin-bottom: 3px; }
+    .sched-info p { color: var(--gray); font-size: 0.85em; line-height: 1.5; }
+    .tip-inline {
+      background: #fffbeb; border-left: 3px solid var(--gold);
+      padding: 8px 12px; border-radius: 0 8px 8px 0;
+      font-size: 0.82em; color: #78530a; margin-top: 6px;
+    }
+    .star-note {
+      background: linear-gradient(135deg, #0d1b2a, #1b3a5c);
+      color: white; border-radius: 10px;
+      padding: 12px 16px; margin-top: 8px;
+      font-size: 0.85em;
+    }
+
+    /* ─── RESERVAS ─── */
+    .reservas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .reserva-card {
+      background: var(--white); border-radius: 14px;
+      padding: 20px; border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      position: relative; overflow: hidden;
+    }
+    .reserva-card::before {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0; width: 4px;
+    }
+    .reserva-card.done::before { background: var(--green); }
+    .reserva-card.alarm::before { background: var(--gold); }
+    .reserva-card.pending::before { background: var(--blue); }
+    .reserva-status {
+      display: inline-flex; align-items: center; gap: 5px;
+      border-radius: 20px; padding: 3px 12px;
+      font-size: 0.72em; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .s-done { background: #e8f5e9; color: #2e7d32; }
+    .s-alarm { background: #fffde7; color: #f57f17; }
+    .s-pending { background: #e3f2fd; color: #1565c0; }
+    .reserva-card h3 { color: var(--navy); font-size: 0.95em; font-weight: 700; margin-bottom: 8px; }
+    .reserva-card p { font-size: 0.85em; color: var(--gray); line-height: 1.6; }
+    .ref-code { font-family: 'Courier New', monospace; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; color: var(--navy); }
+
+    /* ─── RESTAURANTES ─── */
+    .resto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+    .resto-card {
+      background: var(--white); border-radius: 14px;
+      padding: 20px; border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .resto-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .resto-card .resto-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+    .resto-card h3 { color: var(--navy); font-size: 1em; font-weight: 700; }
+    .resto-price { font-size: 0.85em; color: var(--gold); font-weight: 700; }
+    .resto-tag {
+      display: inline-block; background: #f0f4f8; color: var(--blue);
+      border-radius: 20px; padding: 2px 10px;
+      font-size: 0.75em; font-weight: 600; margin-bottom: 8px;
+    }
+    .resto-card p { font-size: 0.85em; color: var(--gray); line-height: 1.5; }
+
+    /* ─── QUÉ VISITAR ─── */
+    .visit-section-title {
+      font-size: 1em; font-weight: 700; color: var(--navy);
+      margin: 28px 0 14px; display: flex; align-items: center; gap: 8px;
+    }
+    .visit-section-title::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .visit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .visit-card {
+      background: var(--white); border-radius: 12px;
+      padding: 18px; border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: transform 0.2s;
+    }
+    .visit-card:hover { transform: translateY(-2px); }
+    .visit-icon { font-size: 1.8em; margin-bottom: 8px; }
+    .visit-card h3 { color: var(--navy); font-size: 0.9em; font-weight: 700; margin-bottom: 5px; }
+    .visit-card p { font-size: 0.82em; color: var(--gray); line-height: 1.5; }
+    .free-badge {
+      display: inline-block; background: #e8f5e9; color: #2e7d32;
+      border-radius: 20px; padding: 1px 8px; font-size: 0.72em;
+      font-weight: 700; margin-bottom: 5px;
+    }
+
+    /* ─── INFO PRÁCTICA ─── */
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .tip-card {
+      background: var(--white); border-radius: 14px;
+      padding: 20px; border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .tip-card .tip-icon { font-size: 2em; margin-bottom: 10px; }
+    .tip-card h3 { color: var(--navy); font-size: 0.9em; font-weight: 700; margin-bottom: 10px; }
+    .tip-card ul { padding-left: 16px; }
+    .tip-card li { font-size: 0.84em; color: var(--gray); line-height: 1.7; }
+
+    /* ─── DIVIDER ─── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy);
+      color: #90a8c5; text-align: center;
+      padding: 32px 20px; font-size: 0.85em;
+    }
+    footer span { color: var(--gold); }
+    footer a { color: var(--teal); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .countdown-wrap { gap: 2px; padding: 16px 12px; }
+      .cd-block { min-width: 52px; }
+      .cd-num { font-size: 1.8em; }
+      .flight-card { gap: 10px; }
+      .flight-city .time { font-size: 1.2em; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-flag">🇺🇸</span>
+    <h1>Washington <span>D.C.</span></h1>
+    <p class="hero-sub">Junio 2026</p>
+
+    <p class="countdown-title">Faltan</p>
+    <div class="countdown-wrap">
+      <div class="cd-block">
+        <span class="cd-num" id="cd-days">--</span>
+        <span class="cd-label">días</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block">
+        <span class="cd-num" id="cd-hours">--</span>
+        <span class="cd-label">horas</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block">
+        <span class="cd-num" id="cd-mins">--</span>
+        <span class="cd-label">min</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block">
+        <span class="cd-num" id="cd-secs">--</span>
+        <span class="cd-label">seg</span>
+      </div>
+    </div>
+
+    <div class="hero-badges">
+      <span class="hero-badge">✈️ Salida <strong>17 jun · 10:00</strong> PMI</span>
+      <span class="hero-badge">🏨 <strong>Melrose Georgetown Hotel</strong></span>
+      <span class="hero-badge">👥 <strong>3</strong> viajeros</span>
+      <span class="hero-badge">🌙 <strong>5</strong> noches</span>
+      <span class="hero-badge">🔬 Congreso <strong>20 jun</strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <ul>
+    <li><a href="#vuelos">Vuelos</a></li>
+    <li><a href="#hotel">Hotel</a></li>
+    <li><a href="#congreso">Congreso</a></li>
+    <li><a href="#itinerario">Itinerario</a></li>
+    <li><a href="#reservas">Reservas</a></li>
+    <li><a href="#restaurantes">Restaurantes</a></li>
+    <li><a href="#visitar">Visitar</a></li>
+    <li><a href="#practico">Info práctica</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ VUELOS ═══ -->
+<section class="section" id="vuelos">
+  <div class="section-header">
+    <h2>✈️ Vuelos</h2>
+    <div class="section-line"></div>
+    <p>United Airlines · Economy clase K · PMI → IAD → PMI</p>
+  </div>
+  <div class="flights-grid">
+
+    <div class="flight-card">
+      <span class="flight-num">UA237 · 1/4</span>
+      <div class="flight-route">
+        <div class="flight-city">
+          <div class="time">10:00</div>
+          <div class="city">Palma de Mallorca</div>
+          <div class="code">PMI</div>
+        </div>
+        <div class="flight-arrow">
+          <div class="plane">✈</div>
+          <div class="date">Mié 17 jun 2026</div>
+        </div>
+        <div class="flight-city">
+          <div class="time">13:05</div>
+          <div class="city">Newark / New York</div>
+          <div class="code">EWR</div>
+        </div>
+      </div>
+      <div class="flight-meta"><strong>Conexión</strong> Newark EWR</div>
+    </div>
+
+    <div class="flight-card">
+      <span class="flight-num">UA1992 · 2/4</span>
+      <div class="flight-route">
+        <div class="flight-city">
+          <div class="time">15:08</div>
+          <div class="city">Newark / New York</div>
+          <div class="code">EWR</div>
+        </div>
+        <div class="flight-arrow">
+          <div class="plane">✈</div>
+          <div class="date">Mié 17 jun 2026</div>
+        </div>
+        <div class="flight-city">
+          <div class="time">16:32</div>
+          <div class="city">Washington DC</div>
+          <div class="code">IAD</div>
+        </div>
+      </div>
+      <div class="flight-meta"><strong>Llegada DC</strong> ~16:30h</div>
+    </div>
+
+    <div class="flight-card">
+      <span class="flight-num">UA1498 · 3/4</span>
+      <div class="flight-route">
+        <div class="flight-city">
+          <div class="time">12:35</div>
+          <div class="city">Washington DC</div>
+          <div class="code">IAD</div>
+        </div>
+        <div class="flight-arrow">
+          <div class="plane">✈</div>
+          <div class="date">Lun 22 jun 2026</div>
+        </div>
+        <div class="flight-city">
+          <div class="time">14:01</div>
+          <div class="city">Newark / New York</div>
+          <div class="code">EWR</div>
+        </div>
+      </div>
+      <div class="flight-meta"><strong>Conexión</strong> Newark EWR</div>
+    </div>
+
+    <div class="flight-card">
+      <span class="flight-num">UA236 · 4/4</span>
+      <div class="flight-route">
+        <div class="flight-city">
+          <div class="time">16:10</div>
+          <div class="city">Newark / New York</div>
+          <div class="code">EWR</div>
+        </div>
+        <div class="flight-arrow">
+          <div class="plane">✈</div>
+          <div class="date">Lun 22 jun → Mar 23 jun</div>
+        </div>
+        <div class="flight-city">
+          <div class="time">06:15</div>
+          <div class="city">Palma de Mallorca</div>
+          <div class="code">PMI</div>
+        </div>
+      </div>
+      <div class="flight-meta"><strong>Llegada</strong> Mar 23 jun · 06:15</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ═══ HOTEL ═══ -->
+<section class="section" id="hotel">
+  <div class="section-header">
+    <h2>🏨 Hotel</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="hotel-card">
+    <h3>Melrose Georgetown Hotel</h3>
+    <p class="addr">📍 2430 Pennsylvania Ave NW, Washington, DC 20037</p>
+    <p>En el corazón de <strong>Georgetown</strong>, el barrio más histórico y elegante de Washington. A pie de los mejores restaurantes, el canal C&O y el río Potomac. Y a solo 5 minutos del hospital donde se celebra el congreso.</p>
+    <div class="hotel-tags">
+      <span class="hotel-tag">🚶 Lincoln Memorial a 20 min a pie</span>
+      <span class="hotel-tag">🔬 5 min del MedStar Georgetown Hospital</span>
+      <span class="hotel-tag">🌉 Key Bridge junto al hotel</span>
+      <span class="hotel-tag">🍽️ M Street a 5 min</span>
+      <span class="hotel-tag">🚗 Uber al Mall: 10–15 min</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ═══ CONGRESO ═══ -->
+<section class="section" id="congreso">
+  <div class="section-header">
+    <h2>🔬 Congreso</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="day-card">
+    <div class="day-header color-congress">
+      <div class="day-num-badge">🔬</div>
+      <div>
+        <h3>ISFGS North American Meeting 2026</h3>
+        <div class="day-date">Sábado 20 de junio · Todo el día</div>
+      </div>
+    </div>
+    <div class="day-body congress-body">
+      <div class="congress-info">
+        <span class="congress-icon">🏥</span>
+        <div>
+          <h4>International Society of Fluorescence-Guided Surgery</h4>
+          <p>Meeting centrado en cirugía guiada por fluorescencia. Sesiones didácticas, presentación de abstracts y oportunidades de colaboración internacional. <a href="https://isfgs.org/na-meeting" target="_blank" style="color:var(--blue)">isfgs.org/na-meeting</a></p>
+          <div class="venue">
+            📍 <strong>Goldberg Auditorium — MedStar Georgetown University Hospital</strong><br />
+            Gorman Building, Ground Floor · 3800 Reservoir Rd, Washington, DC
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 22px; display: grid; gap: 10px;">
+        <div class="schedule-item">
+          <span class="time-pill morning">07:00</span>
+          <div class="sched-info"><h4>Registration &amp; Breakfast</h4></div>
+        </div>
+        <div class="schedule-item">
+          <span class="time-pill morning">07:30</span>
+          <div class="sched-info"><h4>SESSION I — Invited Lectures</h4><p>General concepts of Fluorescence-Guided Surgery</p></div>
+        </div>
+        <div class="schedule-item">
+          <span class="time-pill morning">09:25</span>
+          <div class="sched-info"><h4>Coffee Break</h4></div>
+        </div>
+        <div class="schedule-item">
+          <span class="time-pill morning">09:55</span>
+          <div class="sched-info"><h4>SESSION II — General Abstracts</h4></div>
+        </div>
+        <div class="schedule-item">
+          <span class="time-pill afternoon">11:55</span>
+          <div class="sched-info"><h4>Lunch</h4></div>
+        </div>
+        <div class="schedule-item">
+          <span class="time-pill afternoon">13:00</span>
+          <div class="sched-info"><h4>SESSION III — Applications of Existing Technology</h4></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ═══ ITINERARIO ═══ -->
+<section class="section" id="itinerario">
+  <div class="section-header">
+    <h2>📅 Itinerario</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- DÍA 1 -->
+  <div class="day-card">
+    <div class="day-header color-1">
+      <div class="day-num-badge">1</div>
+      <div>
+        <h3>Llegada · Georgetown</h3>
+        <div class="day-date">Miércoles 17 junio</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="schedule-item">
+        <span class="time-pill exact">16:32</span>
+        <div class="sched-info"><h4>✈️ Aterrizaje en IAD</h4><p>Vuelo UA1992. Traslado al hotel (~45 min en Uber).</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill evening">Tarde</span>
+        <div class="sched-info"><h4>Paseo por Georgetown</h4><p>M Street, canal C&O, Washington Harbour junto al Potomac. Todo a pie desde el hotel.</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill night">Noche</span>
+        <div class="sched-info"><h4>🍽️ Cena en Georgetown</h4><p>Martin's Tavern o Fiola Mare. Ver sección restaurantes.</p></div>
+      </div>
+      <div class="tip-inline">💡 Día de llegada — sin presión. Georgetown tiene todo a mano.</div>
+    </div>
+  </div>
+
+  <!-- DÍA 2 -->
+  <div class="day-card">
+    <div class="day-header color-2">
+      <div class="day-num-badge">2</div>
+      <div>
+        <h3>Capitolio · Biblioteca del Congreso</h3>
+        <div class="day-date">Jueves 18 junio · Día libre</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="schedule-item">
+        <span class="time-pill exact">08:50</span>
+        <div class="sched-info">
+          <h4>Capitol Visitor Center — Recoger pase</h4>
+          <p>Presentarse 60 min antes del tour. Lado este del Capitolio, frente a la Corte Suprema.</p>
+          <div class="tip-inline">⚠️ La confirmación NO es el pase — hay que canjearlo in situ.</div>
+        </div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill exact">09:50</span>
+        <div class="sched-info"><h4>🏛️ Tour del Capitolio</h4><p>Visita guiada ~1h. Reserva <strong>#202606010500416</strong> · 3 personas.</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill morning">~11:00</span>
+        <div class="sched-info"><h4>Exploración libre — Capitol Hill</h4><p>Corte Suprema al lado. Eastern Market a 10 min para un café.</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill exact">12:30</span>
+        <div class="sched-info">
+          <h4>📚 Biblioteca del Congreso</h4>
+          <p>Sala Jefferson — interior más espectacular de Washington. Reserva <strong>#457378883</strong> · 1:00 PM · 3 personas.</p>
+          <div class="tip-inline">💡 Llegar 15–30 min antes. Cola de seguridad en temporada alta.</div>
+        </div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill afternoon">Tarde</span>
+        <div class="sched-info"><h4>📜 Archivos Nacionales</h4><p>Declaración de Independencia, Constitución y Carta de Derechos originales. A 15 min a pie del Capitolio.</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill night">Noche</span>
+        <div class="sched-info"><h4>🍽️ Cena en Penn Quarter</h4><p>Barrio gastronómico cerca del Mall, junto a los Archivos.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DÍA 3 -->
+  <div class="day-card">
+    <div class="day-header color-3">
+      <div class="day-num-badge">3</div>
+      <div>
+        <h3>Monumentos · Washington Monument</h3>
+        <div class="day-date">Viernes 19 junio · Día libre</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="schedule-item">
+        <span class="time-pill exact">10:00</span>
+        <div class="sched-info"><h4>🗼 Washington Monument</h4><p>Subida en ascensor con vistas panorámicas. Reservar en <a href="https://www.recreation.gov/ticket/facility/300031" target="_blank" style="color:var(--blue)">recreation.gov</a> (ver alarma en reservas).</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill morning">Mediodía</span>
+        <div class="sched-info"><h4>🏠 Casa Blanca</h4><p>Fachada norte desde Lafayette Square. Sin reserva necesaria.</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill afternoon">Tarde</span>
+        <div class="sched-info"><h4>National Mall</h4><p>Paseo por el gran eje: WWII Memorial, Reflecting Pool.</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill evening">Atardecer</span>
+        <div class="sched-info">
+          <h4>🌙 Circuito de monumentos nocturnos</h4>
+          <p>Lincoln Memorial → Reflecting Pool → Vietnam Veterans Memorial → MLK Memorial → Jefferson Memorial. A pie, 1.5–2h.</p>
+          <div class="star-note">⭐ Hacer los monumentos de noche es de lo más impactante del viaje. No te lo pierdas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DÍA 4 — CONGRESO -->
+  <div class="day-card">
+    <div class="day-header color-congress">
+      <div class="day-num-badge">4</div>
+      <div>
+        <h3>ISFGS North American Meeting</h3>
+        <div class="day-date">Sábado 20 junio · Congreso todo el día</div>
+      </div>
+    </div>
+    <div class="day-body congress-body">
+      <div class="congress-info">
+        <span class="congress-icon">🔬</span>
+        <div>
+          <p>Congreso todo el día en el <strong>Goldberg Auditorium, MedStar Georgetown University Hospital</strong> — a 5 min del hotel.</p>
+          <div class="venue">📍 3800 Reservoir Rd NW, Washington, DC · Gorman Building, Ground Floor</div>
+        </div>
+      </div>
+      <div style="margin-top: 14px;" class="tip-inline">🌙 Noche libre en Georgetown. Cena tranquila cerca del hotel.</div>
+    </div>
+  </div>
+
+  <!-- DÍA 5 -->
+  <div class="day-card">
+    <div class="day-header color-5">
+      <div class="day-num-badge">5</div>
+      <div>
+        <h3>Arlington · Museos · Moulin Rouge!</h3>
+        <div class="day-date">Domingo 21 junio · Día libre</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="schedule-item">
+        <span class="time-pill morning">Mañana</span>
+        <div class="sched-info"><h4>⚑ Cementerio de Arlington</h4><p>Tumba del Soldado Desconocido, llama eterna de JFK. 20–25 min a pie por Key Bridge o Uber.</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill afternoon">Tarde</span>
+        <div class="sched-info"><h4>🦕 Museos Smithsonian</h4><p>Elige uno: <strong>Natural History</strong> (diamante Hope, dinosaurios) o <strong>Air &amp; Space</strong> (módulo lunar, Wright Brothers). Gratuitos, sin reserva.</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill evening">Antes del espectáculo</span>
+        <div class="sched-info"><h4>🎭 Kennedy Center — Terraza</h4><p>Las mejores vistas del río Potomac. Acceso gratuito y sin reserva.</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill exact">19:30</span>
+        <div class="sched-info">
+          <h4>🌹 Moulin Rouge! The Musical</h4>
+          <p>Opera House — Kennedy Center. Cena de despedida perfecta.<br/><a href="https://www.kennedy-center.org/whats-on/explore-by-genre/theater/2025-2026/moulin-rouge/" target="_blank" style="color:var(--blue); font-size:0.9em">→ Comprar entradas en kennedy-center.org</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DÍA 6 -->
+  <div class="day-card">
+    <div class="day-header color-6">
+      <div class="day-num-badge">6</div>
+      <div>
+        <h3>Última mañana · Salida</h3>
+        <div class="day-date">Lunes 22 junio</div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="schedule-item">
+        <span class="time-pill morning">Mañana</span>
+        <div class="sched-info"><h4>☕ Desayuno en Baked &amp; Wired</h4><p>La mejor pastelería de Georgetown, a 5 min del hotel. Imprescindible.</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill morning">Mañana</span>
+        <div class="sched-info"><h4>Últimas compras — M Street</h4><p>Recuerdos o compras de último momento en Georgetown.</p></div>
+      </div>
+      <div class="schedule-item">
+        <span class="time-pill exact">12:35</span>
+        <div class="sched-info"><h4>✈️ Salida vuelo UA1498</h4><p>IAD → EWR → PMI. Llegar al aeropuerto ~10:00. Aeropuerto: Washington Dulles (IAD).</p></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<hr class="divider" />
+
+<!-- ═══ RESERVAS ═══ -->
+<section class="section" id="reservas">
+  <div class="section-header">
+    <h2>🎟️ Reservas y entradas</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="reservas-grid">
+
+    <div class="reserva-card done">
+      <span class="reserva-status s-done">✓ Confirmado</span>
+      <h3>🏛️ Tour del Capitolio</h3>
+      <p>
+        <strong>18 junio · 09:50h</strong><br />
+        3 personas<br />
+        Código: <span class="ref-code">#202606010500416</span><br />
+        ⚠️ Presentarse 60 min antes.
+      </p>
+    </div>
+
+    <div class="reserva-card done">
+      <span class="reserva-status s-done">✓ Confirmado</span>
+      <h3>📚 Biblioteca del Congreso</h3>
+      <p>
+        <strong>18 junio · 13:00h</strong><br />
+        Thomas Jefferson Building<br />
+        3 personas<br />
+        Código: <span class="ref-code">#457378883</span><br />
+        ⚠️ Llegar 15–30 min antes.
+      </p>
+    </div>
+
+    <div class="reserva-card alarm">
+      <span class="reserva-status s-alarm">⏰ Alarma</span>
+      <h3>🗼 Washington Monument</h3>
+      <p>
+        <strong>Fecha deseada:</strong> 19 junio, 10:00h<br />
+        <strong>Acción:</strong> El <strong>18 junio a las 21:00h</strong> (hora española) / 15:00h EDT se liberan tickets.<br />
+        <a href="https://www.recreation.gov/ticket/facility/300031" target="_blank" style="color:var(--blue)">→ recreation.gov</a>
+      </p>
+    </div>
+
+    <div class="reserva-card pending">
+      <span class="reserva-status s-pending">Pendiente</span>
+      <h3>🌹 Moulin Rouge! The Musical</h3>
+      <p>
+        <strong>21 junio · 19:30h</strong><br />
+        Opera House — Kennedy Center<br />
+        <a href="https://www.kennedy-center.org/whats-on/explore-by-genre/theater/2025-2026/moulin-rouge/" target="_blank" style="color:var(--blue)">→ Comprar entradas</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ═══ RESTAURANTES ═══ -->
+<section class="section" id="restaurantes">
+  <div class="section-header">
+    <h2>🍽️ Restaurantes</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="resto-grid">
+
+    <div class="resto-card">
+      <div class="resto-top"><h3>Martin's Tavern</h3><span class="resto-price">💲💲</span></div>
+      <span class="resto-tag">Georgetown · Clásico</span>
+      <p>El restaurante más histórico de DC desde 1933. Americana clásica. A 5 min del hotel. Aquí cenaron varios presidentes.</p>
+    </div>
+
+    <div class="resto-card">
+      <div class="resto-top"><h3>1789 Restaurant</h3><span class="resto-price">💲💲💲</span></div>
+      <span class="resto-tag">Georgetown · Elegante</span>
+      <p>Alta cocina americana en casa histórica. Ideal para la cena de despedida o noche especial.</p>
+    </div>
+
+    <div class="resto-card">
+      <div class="resto-top"><h3>Fiola Mare</h3><span class="resto-price">💲💲💲</span></div>
+      <span class="resto-tag">Georgetown · Mariscos</span>
+      <p>Mariscos y pasta italiana con vistas al Potomac. De los mejores de Georgetown. Reserva aconsejada.</p>
+    </div>
+
+    <div class="resto-card">
+      <div class="resto-top"><h3>Farmers Fishers Bakers</h3><span class="resto-price">💲💲</span></div>
+      <span class="resto-tag">Georgetown · Casual</span>
+      <p>Americana casual con vistas al agua. Buena relación calidad-precio, ideal para grupos.</p>
+    </div>
+
+    <div class="resto-card">
+      <div class="resto-top"><h3>Baked &amp; Wired</h3><span class="resto-price">💲</span></div>
+      <span class="resto-tag">Georgetown · Cafetería</span>
+      <p>La mejor pastelería de Washington DC. Imprescindible para desayunos. A 5 min del hotel.</p>
+    </div>
+
+    <div class="resto-card">
+      <div class="resto-top"><h3>Penn Quarter</h3><span class="resto-price">💲💲</span></div>
+      <span class="resto-tag">Mall · Barrio gastronómico</span>
+      <p>Zona de restaurantes cerca del Mall y los Archivos. Ideal para cenar tras los museos.</p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ═══ QUÉ VISITAR ═══ -->
+<section class="section" id="visitar">
+  <div class="section-header">
+    <h2>🗺️ Qué visitar</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="visit-section-title">🏛️ Monumentos y lugares históricos</div>
+  <div class="visit-grid">
+    <div class="visit-card">
+      <div class="visit-icon">🗽</div>
+      <span class="free-badge">Gratuito</span>
+      <h3>Lincoln Memorial</h3>
+      <p>Icónico. Mejor al atardecer o de noche. Vistas al Reflecting Pool.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">🕊️</div>
+      <span class="free-badge">Gratuito</span>
+      <h3>Vietnam Veterans Memorial</h3>
+      <p>58.000 nombres grabados en granito negro. Muy emotivo.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">✊</div>
+      <span class="free-badge">Gratuito</span>
+      <h3>MLK Memorial</h3>
+      <p>Estatua de Martin Luther King Jr. emergiendo de la piedra.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">🌊</div>
+      <span class="free-badge">Gratuito</span>
+      <h3>Jefferson Memorial</h3>
+      <p>Junto al Tidal Basin. Precioso al atardecer.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">🇺🇸</div>
+      <span class="free-badge">Gratuito</span>
+      <h3>WWII Memorial</h3>
+      <p>En el centro del Mall, entre Lincoln y Washington Monument.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">🏠</div>
+      <span class="free-badge">Gratuito</span>
+      <h3>Casa Blanca</h3>
+      <p>Fachada desde Lafayette Square. Sin acceso al interior.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">⚑</div>
+      <span class="free-badge">Gratuito</span>
+      <h3>Arlington Cemetery</h3>
+      <p>Tumba Soldado Desconocido + llama eterna de JFK.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">📜</div>
+      <span class="free-badge">Gratuito</span>
+      <h3>Archivos Nacionales</h3>
+      <p>Declaración de Independencia y Constitución originales.</p>
+    </div>
+  </div>
+
+  <div class="visit-section-title">🏛️ Museos (todos gratuitos)</div>
+  <div class="visit-grid">
+    <div class="visit-card">
+      <div class="visit-icon">🦕</div>
+      <span class="free-badge">Gratuito · Sin reserva</span>
+      <h3>Natural History Museum</h3>
+      <p>Diamante Hope, dinosaurios, ballena azul. Smithsonian.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">🚀</div>
+      <span class="free-badge">Gratuito · Sin reserva</span>
+      <h3>Air &amp; Space Museum</h3>
+      <p>Módulo lunar Apollo, Wright Brothers, Concorde. Smithsonian.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">🎨</div>
+      <span class="free-badge">Gratuito · Sin reserva</span>
+      <h3>National Gallery of Art</h3>
+      <p>Da Vinci, Monet, Picasso. Arte de primer nivel.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">🗺️</div>
+      <span class="free-badge">Gratuito · Sin reserva</span>
+      <h3>American History Museum</h3>
+      <p>Star-Spangled Banner original, historia americana. Smithsonian.</p>
+    </div>
+  </div>
+
+  <div class="visit-section-title">🌳 Barrios y paseos</div>
+  <div class="visit-grid">
+    <div class="visit-card">
+      <div class="visit-icon">🏘️</div>
+      <h3>Georgetown</h3>
+      <p>Barrio histórico colonial. M Street, canal C&O, Georgetown University.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">🎬</div>
+      <h3>Exorcist Steps</h3>
+      <p>Las escaleras de la película El Exorcista. A 5 min del hotel.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">🌉</div>
+      <h3>Key Bridge</h3>
+      <p>Vistas al Potomac. Perfecto para cruzar a Arlington a pie.</p>
+    </div>
+    <div class="visit-card">
+      <div class="visit-icon">🎭</div>
+      <h3>Kennedy Center</h3>
+      <p>Mejor terraza de DC. Acceso gratuito a las vistas del Potomac.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ═══ INFO PRÁCTICA ═══ -->
+<section class="section" id="practico">
+  <div class="section-header">
+    <h2>ℹ️ Información práctica</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">🚇</div>
+      <h3>Transporte</h3>
+      <ul>
+        <li>Metro WMATA cubre todo el Mall</li>
+        <li>Georgetown sin metro → Uber / bus 38B</li>
+        <li>Arlington: Uber desde hotel (~10 min)</li>
+        <li>Aeropuerto IAD: ~50 min en Uber</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🌡️</div>
+      <h3>Clima en junio</h3>
+      <ul>
+        <li>Calor y humedad alta</li>
+        <li>25–33°C de media</li>
+        <li>Ropa ligera y transpirable</li>
+        <li>Protector solar indispensable</li>
+        <li>Botella de agua siempre encima</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💰</div>
+      <h3>Presupuesto</h3>
+      <ul>
+        <li>Museos Smithsonian: gratis</li>
+        <li>Monumentos: gratis</li>
+        <li>Capitolio y Biblioteca: gratis</li>
+        <li>Washington Monument: gratis</li>
+        <li>Moulin Rouge! y cenas: pago</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">⚠️</div>
+      <h3>Notas clave</h3>
+      <ul>
+        <li>Capitolio: presentarse 60 min antes</li>
+        <li>Biblioteca: llegar 15–30 min antes</li>
+        <li>Washington Monument: alarma 18/6 a las 21h (ESP)</li>
+        <li>IAD más cercano a Georgetown</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📱</div>
+      <h3>Apps útiles</h3>
+      <ul>
+        <li>Google Maps: navegación</li>
+        <li>Uber: transporte</li>
+        <li>WMATA: metro</li>
+        <li>recreation.gov: Washington Monument</li>
+        <li>kennedy-center.org: espectáculos</li>
+      </ul>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🏥</div>
+      <h3>Seguridad</h3>
+      <ul>
+        <li>Ciudad segura para turistas</li>
+        <li>Llevar seguro médico de viaje</li>
+        <li>CVS y Walgreens por toda la ciudad</li>
+        <li>Emergencias: 911</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>🇺🇸 <span>Washington DC · Junio 2026</span></p>
+  <p style="margin-top:8px; font-size:0.82em">
+    <a href="https://isfgs.org/na-meeting">isfgs.org/na-meeting</a> ·
+    <a href="https://visitthecapitol.gov">visitthecapitol.gov</a> ·
+    <a href="https://www.recreation.gov/ticket/facility/300031">recreation.gov</a>
+  </p>
+</footer>
+
+<!-- ═══ COUNTDOWN SCRIPT ═══ -->
+<script>
+  // Salida: 17 junio 2026, 10:00 hora local de Palma (Europe/Madrid, CEST = UTC+2)
+  // = 2026-06-17T08:00:00Z
+  const target = new Date('2026-06-17T08:00:00Z');
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent = '00';
+      document.getElementById('cd-secs').textContent = '00';
+      return;
+    }
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000)  / 60000);
+    const secs  = Math.floor((diff % 60000)    / 1000);
+    document.getElementById('cd-days').textContent  = pad(days);
+    document.getElementById('cd-hours').textContent = pad(hours);
+    document.getElementById('cd-mins').textContent  = pad(mins);
+    document.getElementById('cd-secs').textContent  = pad(secs);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
